@@ -8,8 +8,10 @@ const NasaInfo = () => {
     const [date, setDate] = useState("");
     const [description, setDescription] = useState("");
     const [title, setTitle] = useState("");
+    const [newDate, setNewDate] = useState('2020-08-12')
+    console.log(newDate)
     useEffect(() => {
-        axios.get("https://api.nasa.gov/planetary/apod?date=2020-08-08&api_key=xOmejW20hEu7hXyr3lXd7kQyvDRtgyQ0JNOsmWKE")
+        axios.get(`https://api.nasa.gov/planetary/apod?date=${newDate}&api_key=xOmejW20hEu7hXyr3lXd7kQyvDRtgyQ0JNOsmWKE`)
             .then(response => {
                 setImage(response.data.url);
                 setDate(response.data.date);
@@ -20,7 +22,12 @@ const NasaInfo = () => {
             .catch(error => {
                 console.log(error, "error") 
             })
-    }, []);
+    }, [handleChange]);
+
+    //Update date
+    function handleChange (event) {
+        setNewDate(event.target.value)
+    }
 
     //Reactstrap button
     const [modal, setModal] = useState(false);
@@ -52,7 +59,7 @@ const NasaInfo = () => {
         </Row>
         <Row>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Button outline color="primary">More Space Images</Button>{' '}
+                <input type="date" value={newDate} onChange={handleChange} style={{margin: "5x"}}></input>
             </Col>
         </Row>
     </div>
