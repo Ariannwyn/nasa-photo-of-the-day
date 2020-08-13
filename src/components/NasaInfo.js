@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Col, Row, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Col, Row, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
 
 
 const NasaInfo = () => {
@@ -8,8 +8,8 @@ const NasaInfo = () => {
     const [date, setDate] = useState("");
     const [description, setDescription] = useState("");
     const [title, setTitle] = useState("");
-    const [newDate, setNewDate] = useState('2020-08-12')
-    console.log(newDate)
+    const [newDate, setNewDate] = useState('2020-08-13');
+    
     useEffect(() => {
         axios.get(`https://api.nasa.gov/planetary/apod?date=${newDate}&api_key=xOmejW20hEu7hXyr3lXd7kQyvDRtgyQ0JNOsmWKE`)
             .then(response => {
@@ -27,6 +27,7 @@ const NasaInfo = () => {
     //Update date
     function handleChange (event) {
         setNewDate(event.target.value)
+        
     }
 
     //Reactstrap button
@@ -59,7 +60,7 @@ const NasaInfo = () => {
         </Row>
         <Row>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <input type="date" value={newDate} onChange={handleChange} style={{margin: "5x"}}></input>
+                <Input type="date" name="date" value={newDate} onChange={handleChange} style={{margin: "5px"}} />
             </Col>
         </Row>
     </div>
@@ -68,35 +69,3 @@ const NasaInfo = () => {
 }
 
 export default NasaInfo;
-
-
-
-
-
-
-// const ModalExample = (props) => {
-//     const {
-//       buttonLabel,
-//       className
-//     } = props;
-  
-//     const [modal, setModal] = useState(false);
-  
-//     const toggle = () => setModal(!modal);
-  
-//     return (
-//       <div>
-//         <Button color="danger" >{buttonLabel}</Button>
-//         <Modal isOpen={modal} toggle={toggle} className={className}>
-//           <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-//           <ModalBody>
-//             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-//           </ModalBody>
-//           <ModalFooter>
-//             <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
-//             <Button color="secondary" onClick={toggle}>Cancel</Button>
-//           </ModalFooter>
-//         </Modal>
-//       </div>
-//     );
-//   }
