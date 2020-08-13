@@ -14,16 +14,27 @@ const NasaInfo = () => {
     useEffect(() => {
         axios.get(`https://api.nasa.gov/planetary/apod?date=${newDate}&api_key=xOmejW20hEu7hXyr3lXd7kQyvDRtgyQ0JNOsmWKE`)
             .then(response => {
-                setImage(response.data.url);
-                setDate(response.data.date);
-                setDescription(response.data.explanation);
-                setTitle(response.data.title);;
-                console.log(response.data);
+                let mediaType = response.data.media_type;
+                if (mediaType === "image"){
+                  setImage(response.data.url);
+                  setDate(response.data.date);
+                  setDescription(response.data.explanation);
+                  setTitle(response.data.title);
+                }
+                else if (mediaType === "video"){
+                  axios.get("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=2012-03-14") 
+                  .then(response => {
+                    setImage(response.data.url);
+                    setDate(response.data.date);
+                    setDescription(response.data.explanation);
+                    setTitle(response.data.title);
+                  })
+                }
             })
             .catch(error => {
                 console.log(error, "error") 
             })
-    }, [handleChange]);
+    }, [newDate]);
 
     //Update date
     function handleChange (event) {
