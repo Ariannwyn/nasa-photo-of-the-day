@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Col, Row, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
+import { Col, Row, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
+import { Button } from '@material-ui/core';
 
 
 const NasaInfo = () => {
@@ -47,13 +48,13 @@ const NasaInfo = () => {
         </Row>
         <Row>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-                <Button style={{margin: "10px"}} outline color="primary" onClick={toggle}>Description</Button>{' '} 
+                <Button style={{margin: "10px"}} variant="contained" onClick={toggle}>Description</Button>
                 <Modal isOpen={modal} toggle={toggle} >
                 <ModalHeader style={{backgroundColor: "#304056", border: "#304056"}} toggle={toggle}>{title}</ModalHeader>
                 <ModalBody style={{backgroundColor: "#304056", border: "#304056"}}>{date}</ModalBody>
                 <ModalBody style={{backgroundColor: "#304056", border: "#304056"}}>{description}</ModalBody>
                 <ModalFooter style={{backgroundColor: "#304056", border: "#304056"}}>
-                <Button outline color="primary" onClick={toggle}>Close</Button>{' '}
+                <Button variant="contained" onClick={toggle}>Close</Button>
                 </ModalFooter>
                 </Modal>
             </Col>
